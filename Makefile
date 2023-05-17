@@ -5,7 +5,8 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
 SRCS =	main.c\
-		ft_error.c
+		ft_error.c\
+		ft_init_pipex.c
 
 INCLUDE = pipex.h
 
@@ -29,7 +30,7 @@ $(NAME) : $(PATH_OBJS) $(OBJS) $(PATH_INCLUDE)$(INCLUDE)
 
 
 $(OBJS)	: $(PATH_OBJS)%.o: $(PATH_SRCS)%.c $(PATH_INCLUDE)$(INCLUDE) $(LIBFT_A)
-				$(CC) $(CCFLAG) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -c $< -o $@
+				$(CC) $(CFLAG) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -c $< -o $@
 
 
 $(PATH_OBJS) :
