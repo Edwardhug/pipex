@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:46 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/17 15:10:59 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/17 16:10:22 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	id = fork();
-	ft_printf("id fork = %d\n", id);
+	// ft_printf("id fork = %d\n", id);
 	if (id == 0)
 		ft_apply_cmd1(av, fd);
-	else 
-		ft_printf("hello\n");
+	else
+	{
+		waitpid(id, 0, 0);
+	}
 	close(fd);
 } 
