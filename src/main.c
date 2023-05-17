@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:46 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/17 18:02:56 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/17 18:19:34 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av)
 		else 
 		{
 			waitpid(id[1], 0, 0);
-			ft_remove_file("tamp");
+			// ft_remove_file("tamp");
 		}
 	}
 	// close(fd);

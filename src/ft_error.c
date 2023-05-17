@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:25:27 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/17 17:55:47 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/17 18:18:31 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ int ft_check_name(char **av)
 	int fd;
 
 	fd = open(av[4], O_RDONLY);
-	if (fd)
+	if (fd != -1)
 	{
 		close(fd);
 		ft_remove_file(av[4]);
 	}
 	fd = open("tamp", O_RDONLY);
-	if (fd)
+	// ft_printf("%d\n", fd);
+	if (fd != -1)
 	{
 		close(fd);
 		ft_remove_file("tamp");
