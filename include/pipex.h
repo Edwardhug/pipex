@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:40:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/16 15:42:03 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/17 11:47:44 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 # define PIPEX_H
 
 # include "../Libft/all_libft.h"
+# include <fcntl.h>
 
 #endif
