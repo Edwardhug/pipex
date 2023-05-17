@@ -6,11 +6,23 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:46 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/17 16:10:22 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/17 17:16:15 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+int	ft_init_tamp(int ac, char **av, int fd)
+{
+	int	tamp;
+
+	tamp = open(av[4], O_WRONLY | O_CREAT, 0777);
+	if (tamp == -1)
+	{
+		close(fd);
+		exit(EXIT_FAILURE);
+	}
+}
 
 int	ft_apply_cmd1(char **av, int fd)
 {
@@ -36,21 +48,18 @@ int	main(int ac, char **av)
 {
 	int 	fd;
 	int 	id;
+	int		tamp;
 
-	if (ac != 5)
-	{
-		ft_printf("Error\nWrong number of argument\n");
-		return (0);
-	}
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-	{
-		ft_printf("Error\nNo file1\n");
-		close(fd);
-		return (0);
-	}
+	fd = ft_error_pipex(ac, av);
+	tamp = ft_init_tamp(ac, av, fd);
+	tamp = open(av[4], O_WRONLY | O_CREAT, 0777);
+	// if (tamp == -1)
+	// {
+	// 	close(fd);
+	// 	return (2);
+	// }
+	dup2(tamp, 1);
 	id = fork();
-	// ft_printf("id fork = %d\n", id);
 	if (id == 0)
 		ft_apply_cmd1(av, fd);
 	else
@@ -58,4 +67,5 @@ int	main(int ac, char **av)
 		waitpid(id, 0, 0);
 	}
 	close(fd);
+	close(tamp);
 } 
