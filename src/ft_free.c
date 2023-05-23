@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 15:38:46 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/23 14:55:21 by lgabet           ###   ########.fr       */
+/*   Created: 2023/05/23 13:48:17 by lgabet            #+#    #+#             */
+/*   Updated: 2023/05/23 13:52:24 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int	main(int ac, char **av, char **env)
+void	ft_free_tab(char **str)
 {
-	t_com com;
+	int	i;
 
-	if (ac != 5)
-		return (ft_printf("Wrong number of parameters\n"), 1);
-	if (ft_parsing(av, env, &com))
-		return (ft_printf("Error with parsing\n"), 1);
-	// if (ft_apply_cmd(&com))
-	// 	return (ft_printf("Error with apply\n"), 1);
-	return (0);
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
 }

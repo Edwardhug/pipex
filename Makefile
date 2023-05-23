@@ -5,7 +5,9 @@ CC = gcc
 CFLAG = -Wall -Wextra -Werror
 
 SRCS =	main.c\
-		ft_parsing.c
+		ft_parsing.c\
+		ft_free.c\
+		ft_apply.c
 
 INCLUDE = pipex.h
 
