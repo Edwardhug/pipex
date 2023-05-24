@@ -2,7 +2,7 @@ NAME = pipex
 
 CC = gcc
 
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -g3
 
 SRCS =	main.c\
 		ft_parsing.c\
