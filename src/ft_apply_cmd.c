@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:10:26 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/24 15:45:23 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/24 16:03:05 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ int	ft_apply_last_cmd(t_com *com, char **av, char **env)
 		exe_arg[i] = com->cmd2[i];
 		i++;
 	}
-	exe_arg[i] = com->fd[0];		// ?
-	i++;
+	// exe_arg[i] = com->fd[0];		// ?
+	// i++;
 	exe_arg[i] = NULL;
-	dup2(fd, 1);
+	dup2(com->fd[0], STDIN_FILENO);
+	dup2(fd, STDOUT_FILENO);
+	close(com->fd[0]);
 	execve(exe_arg[0], exe_arg, env);
 	return (0);
 }
