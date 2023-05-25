@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:48 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 11:47:10 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 12:00:07 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,10 @@ int	ft_parsing(char **av, char **env, t_com *com)
 		return (ft_printf("Error with ft_get_path\n"), 1);
 	com->fd_infile = open(av[1], O_RDONLY);
 	if (com->fd_infile == -1)
+	{
+		ft_free_tab(com->all_path);
 		return (ft_printf("Unreadable infile\n"), 1);
+	}
 	if (ft_get_command(com, av))
 		return (ft_printf("Error getting command 1\n"), 1);
 	if (ft_check_command1(com))
