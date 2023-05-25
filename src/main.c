@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:46 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 12:01:30 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 12:57:22 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_remove_file(char *file, char	**env)
 
 int	main(int ac, char **av, char **env)
 {
-	t_com com;
+	t_com	com;
 
 	if (ac != 5)
 		return (ft_printf("Wrong number of parameters\n"), 1);

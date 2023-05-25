@@ -6,13 +6,13 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:48 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 12:55:03 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 12:57:57 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
 
-int ft_get_path(t_com *com, char **env)
+int	ft_get_path(t_com *com, char **env)
 {
 	int	i;
 
