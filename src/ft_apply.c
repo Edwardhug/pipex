@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:54:50 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 13:58:31 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 17:16:49 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,6 @@ int	ft_strlen_tab(char **tab)
 	while (tab[i])
 		i++;
 	return (i);
-}
-
-char	*ft_read_pipex(int fd)
-{
-	char	*tamp;
-	char	*str;
-
-	str = malloc(sizeof(char));
-	if (!str)
-		return (ft_printf("Error with malloc ft_read 1\n"), NULL);
-	str[0] = 0;
-	tamp = get_next_line(fd);
-	while (1)
-	{
-		str = ft_strjoin(str, tamp);
-		tamp = get_next_line(fd);
-		if (!str)
-			return (ft_printf("Error with malloc ft_read 2\n"), NULL);
-		if (!tamp)
-			break ;
-	}
-	return (str);
 }
 
 int	ft_setup_last_cmd(t_com *com, char **av, char **env)

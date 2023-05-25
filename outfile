@@ -1,11 +1,7 @@
-.
-..
-.git
-.gitignore
-include
-infile
 Libft
 Makefile
+include
+infile
 obj
 outfile
 pipex
