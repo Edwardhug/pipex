@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:48 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 12:00:07 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 12:55:03 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,15 @@ int	ft_parsing(char **av, char **env, t_com *com)
 	if (ft_get_command(com, av))
 		return (ft_printf("Error getting command 1\n"), 1);
 	if (ft_check_command1(com))
+	{
+		ft_free_cmd_and_path(com);
 		return (ft_printf("Command1 doesn't exist\n"), 1);
+	}
 	if (ft_check_command2(com))
+	{
+		ft_free_cmd_and_path(com);
+		free(com->path_cmd1);
 		return (ft_printf("Command2 doesn't exist\n"), 1);
+	}
 	return (0);
 }

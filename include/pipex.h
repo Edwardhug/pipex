@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:40:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 11:28:32 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 12:54:12 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int		ft_apply_cmd_1(t_com *com, char **av, char **env);
 int		ft_apply_last_cmd(t_com *com, char **av, char **env);
 int		ft_strlen_tab(char **tab);
 void	ft_free_t_com(t_com *com);
+void	ft_free_cmd(t_com *com);
+void	ft_free_cmd_and_path(t_com *com);
 
 #endif

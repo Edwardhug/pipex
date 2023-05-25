@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:48:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 11:34:43 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 12:54:02 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,10 @@ void	ft_free_t_com(t_com *com)
 	ft_free_cmd(com);
 	free(com->path_cmd1);
 	free(com->path_cmd2);
+}
+
+void	ft_free_cmd_and_path(t_com *com)
+{
+	ft_free_tab(com->all_path);
+	ft_free_cmd(com);
 }
