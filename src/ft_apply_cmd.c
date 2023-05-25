@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 14:10:26 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 12:56:56 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 14:02:50 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_apply_last_cmd(t_com *com, char **av, char **env)
 	int		i;
 	int		fd;
 
-	fd = open(av[4], O_WRONLY | O_CREAT, 0777);
+	fd = open(av[4], O_WRONLY);
 	exe_arg = malloc(sizeof(char *) * (ft_strlen_tab(com->cmd2) + 2));
 	if (!exe_arg)
 		return (ft_printf("Error malloc exe_arg\n"), 1);
