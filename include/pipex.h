@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:40:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/24 15:44:36 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:28:32 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include <sys/wait.h>
 
-typedef struct	s_com
+typedef struct s_com
 {
 	char	*path;
 	char	**all_path;
@@ -33,12 +33,13 @@ typedef struct	s_com
 	int		id;
 }				t_com;
 
-int 	ft_get_path(t_com *com, char **env);
+int		ft_get_path(t_com *com, char **env);
 int		ft_parsing(char **av, char **env, t_com *com);
 void	ft_free_tab(char **str);
 int		ft_apply_cmd(t_com *com, char **av, char **env);
 int		ft_apply_cmd_1(t_com *com, char **av, char **env);
 int		ft_apply_last_cmd(t_com *com, char **av, char **env);
 int		ft_strlen_tab(char **tab);
+void	ft_free_t_com(t_com *com);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:38:46 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/24 16:07:57 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:26:53 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int	main(int ac, char **av, char **env)
 		return (ft_printf("Error with parsing\n"), 1);
 	if (ft_apply_cmd(&com, av, env))
 		return (ft_printf("Error with apply\n"), 1);
+	ft_free_t_com(&com);
 	return (0);
 }

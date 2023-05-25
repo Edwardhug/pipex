@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:48 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/23 14:54:01 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/25 11:47:10 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int	ft_get_command(t_com *com, char **av)
 
 int	ft_check_command1(t_com *com)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (com->cmd1[0][0] == '/')
@@ -59,19 +60,21 @@ int	ft_check_command1(t_com *com)
 	}
 	while (com->all_path[i])
 	{
-		com->path_cmd1 = ft_strjoin(com->all_path[i], "/");
-		com->path_cmd1 = ft_strjoin(com->path_cmd1, com->cmd1[0]);
+		tmp = ft_strjoin(com->all_path[i], "/");
+		com->path_cmd1 = ft_strjoin(tmp, com->cmd1[0]);
 		if (access(com->path_cmd1, F_OK | X_OK) != -1)
-			return (0);
+			return (free(tmp), 0);
+		free(com->path_cmd1);
+		free(tmp);
 		i++;
 	}
-	free(com->path_cmd1);
 	return (1);
 }
 
 int	ft_check_command2(t_com *com)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	if (com->cmd2[0][0] == '/')
@@ -83,13 +86,14 @@ int	ft_check_command2(t_com *com)
 	}
 	while (com->all_path[i])
 	{
-		com->path_cmd2 = ft_strjoin(com->all_path[i], "/");
-		com->path_cmd2 = ft_strjoin(com->path_cmd2, com->cmd2[0]);
+		tmp = ft_strjoin(com->all_path[i], "/");
+		com->path_cmd2 = ft_strjoin(tmp, com->cmd2[0]);
 		if (access(com->path_cmd2, F_OK | X_OK) != -1)
-			return (0);
+			return (free(tmp), 0);
+		free(com->path_cmd2);
+		free(tmp);
 		i++;
 	}
-	free(com->path_cmd2);
 	return (1);
 }
 
