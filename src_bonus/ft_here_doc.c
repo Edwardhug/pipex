@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:42:42 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/30 12:13:30 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/05/30 19:01:12 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_child_here_doc(char **av, int *fd)
 	close(fd[0]);
 	while (1)
 	{
+		ft_printf("> ");
 		tmp = get_next_line(0);
 		if (ft_strncmp(tmp, av[2], ft_strlen(av[2])) == 0)
 		{
@@ -51,6 +52,6 @@ void	ft_here_doc(int ac, char **av)
 	{
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, 0, 0);
+		wait(NULL);
 	}
 }
