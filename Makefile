@@ -31,7 +31,8 @@ PATH_LIBFT = Libft/
 NAME_BONUS = pipex
 
 SRCS_BONUS = pipex_bonus.c\
-			 ft_utils.c
+			 ft_utils.c\
+			 ft_here_doc.c
 
 OBJS_BONUS = $(SRCS_BONUS:%.c=$(PATH_OBJS)%.o)
 
