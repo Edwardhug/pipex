@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:23:36 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/01 16:18:17 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:47:29 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ void	ft_free_tab(char **str)
 	free(str);
 }
 
-void	print_error_cmd(char **splited_cmd)
+void	print_error(char **splited_cmd, char **all_path)
 {
 	ft_putstr_fd("command not found: ", 2);
 	ft_putstr_fd(splited_cmd[0], 2);
 	ft_putstr_fd("\n", 2);
+	ft_free_tab(splited_cmd);
+	ft_free_tab(all_path);
 }
 
 char	*ft_get_path_cmd(char **all_path, char **splited_cmd)
@@ -43,7 +45,7 @@ char	*ft_get_path_cmd(char **all_path, char **splited_cmd)
 	{
 		path_cmd = ft_strdup(splited_cmd[0]);
 		if (access(path_cmd, F_OK | X_OK) == -1)
-			return (print_error_cmd(splited_cmd), free(path_cmd), NULL);
+			return (print_error(splited_cmd, all_path), free(path_cmd), NULL);
 		return (path_cmd);
 	}
 	while (all_path[i])
@@ -56,8 +58,8 @@ char	*ft_get_path_cmd(char **all_path, char **splited_cmd)
 		free(tmp);
 		i++;
 	}
-	print_error_cmd(splited_cmd);
-	return (ft_free_tab(all_path), ft_free_tab(splited_cmd), NULL);
+	print_error(splited_cmd, all_path);
+	return (NULL);
 }
 
 char	*ft_get_cmd(char **env, char **splited_cmd)
