@@ -5,12 +5,8 @@ CC = gcc
 
 CFLAG = -Wall -Wextra -Werror -g3
 
-SRCS =	main.c\
-		ft_parsing.c\
-		ft_free.c\
-		ft_apply.c\
-		ft_apply_cmd.c
-
+SRCS =	pipex.c\
+		ft_utils.c
 
 INCLUDE = pipex.h
 
@@ -31,7 +27,7 @@ PATH_LIBFT = Libft/
 NAME_BONUS = pipex_bonus
 
 SRCS_BONUS = pipex_bonus.c\
-			 ft_utils.c\
+			 ft_utils_bonus.c\
 			 ft_here_doc.c
 
 PATH_OBJS_BONUS = obj_bonus/

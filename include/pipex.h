@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:40:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/25 12:54:12 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:59:43 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,8 @@
 # include <unistd.h>
 # include <sys/wait.h>
 
-typedef struct s_com
-{
-	char	*path;
-	char	**all_path;
-	int		fd_infile;
-	char	*infile;
-	char	**cmd1;
-	char	**cmd2;
-	char	*path_cmd1;
-	char	*path_cmd2;
-	int		fd[2];
-	int		id;
-}				t_com;
-
-int		ft_get_path(t_com *com, char **env);
-int		ft_parsing(char **av, char **env, t_com *com);
-void	ft_free_tab(char **str);
-int		ft_apply_cmd(t_com *com, char **av, char **env);
-int		ft_apply_cmd_1(t_com *com, char **av, char **env);
-int		ft_apply_last_cmd(t_com *com, char **av, char **env);
-int		ft_strlen_tab(char **tab);
-void	ft_free_t_com(t_com *com);
-void	ft_free_cmd(t_com *com);
-void	ft_free_cmd_and_path(t_com *com);
+void	ft_apply_exec(char *cmd, char **env);
+char	*ft_get_cmd(char **env, char **splited_cmd);
+char	*ft_get_path_cmd(char **all_path, char **splited_cmd);
 
 #endif
