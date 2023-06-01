@@ -28,7 +28,7 @@ PATH_LIBFT = Libft/
 
 # ----------------------------------variable bonus--------------------------
 
-NAME_BONUS = pipex
+NAME_BONUS = pipex_bonus
 
 SRCS_BONUS = pipex_bonus.c\
 			 ft_utils.c\
@@ -53,8 +53,10 @@ $(OBJS)	: $(PATH_OBJS)%.o: $(PATH_SRCS)%.c $(PATH_INCLUDE)$(INCLUDE) $(LIBFT_A)
 
 # --------------------------------make bonus---------------------------------
 
-bonus: $(PATH_OBJS) $(OBJS_BONUS) $(PATH_INCLUDE)$(INCLUDE_BONUS)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_A) -o $(NAME)
+bonus: $(NAME_BONUS)
+
+$(NAME_BONUS) : $(PATH_OBJS) $(OBJS_BONUS) $(PATH_INCLUDE)$(INCLUDE_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_A) -o $(NAME_BONUS)
 
 $(OBJS_BONUS)	: $(PATH_OBJS)%.o: $(PATH_SRCS_BONUS)%.c $(PATH_INCLUDE)$(INCLUDE_BONUS) $(LIBFT_A)
 				$(CC) $(CFLAG) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -c $< -o $@
@@ -75,6 +77,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(NAME_BONUS)
 	@make fclean -C $(PATH_LIBFT)
 
 re: fclean all
