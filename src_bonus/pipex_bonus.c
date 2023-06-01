@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/01 16:21:52 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:41:26 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,17 @@ void	ft_child_process(char **av, char **env, int i, int *fd)
 void	ft_pipe_and_fork(char **av, char **env, int i)
 {
 	int	fd[2];
+	int	pid;
 
 	pipe(fd);
-	if (fork() == 0)
+	pid = fork();
+	if (pid == 0)
 		ft_child_process(av, env, i, fd);
 	else
 	{
+		
 		close(fd[1]);
+		waitpid(pid, 0, 0);
 		dup2(fd[0], STDIN_FILENO);
 	}
 }
