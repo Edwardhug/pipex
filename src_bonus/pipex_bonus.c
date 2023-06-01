@@ -6,26 +6,26 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/01 16:19:33 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:21:52 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
 
-void	ft_child_process(t_struct param, int i, int *fd)
+void	ft_child_process(char **av, char **env, int i, int *fd)
 {
 	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
-	ft_apply_exec(param.av[i], param.env);
+	ft_apply_exec(av[i], env);
 }
 
-void	ft_pipe_and_fork(t_struct param, int i)
+void	ft_pipe_and_fork(char **av, char **env, int i)
 {
 	int	fd[2];
 
 	pipe(fd);
 	if (fork() == 0)
-		ft_child_process(param, i, fd);
+		ft_child_process(av, env, i, fd);
 	else
 	{
 		close(fd[1]);
@@ -33,25 +33,21 @@ void	ft_pipe_and_fork(t_struct param, int i)
 	}
 }
 
-void	ft_loop(t_struct param, int i)
+void	ft_loop(int ac, char **av, char **env, int i)
 {
-	while (i < param.ac - 2)
+	while (i < ac - 2)
 	{
-		ft_pipe_and_fork(param, i);
+		ft_pipe_and_fork(av, env, i);
 		i++;
 	}
 }
 
 int	main(int ac, char **av, char **env)
 {
-	// t_struct	param;
 	int			fd_in;
 	int			fd_out;
 	int			i;
 
-	// param.ac = ac;
-	// param.av = av;
-	// param.env = env;
 	if (ac < 5)
 		return (ft_printf("Wrong number of parameters\n"), 1);
 	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) == 0)

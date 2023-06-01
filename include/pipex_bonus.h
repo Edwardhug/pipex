@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:46:55 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/30 11:58:18 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:21:57 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/wait.h>
-
-typedef struct s_struct
-{
-    int     ac;
-    char    **av;
-    char    **env;
-}               t_struct;
 
 void	ft_apply_exec(char *cmd, char **env);
 char	*ft_get_cmd(char **env, char **splited_cmd);
