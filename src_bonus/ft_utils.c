@@ -6,11 +6,24 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:23:36 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/26 14:11:15 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 13:14:30 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex_bonus.h"
+
+void	ft_free_tab(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
 
 char	*ft_get_path_cmd(char **all_path, char **splited_cmd)
 {

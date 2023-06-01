@@ -42,7 +42,7 @@ INCLUDE_BONUS = pipex_bonus.h
 
 # ------------------------------------make----------------------------------
 
-all: $(NAME)
+all: $(NAME_BONUS)
 
 $(NAME) : $(PATH_OBJS) $(OBJS) $(PATH_INCLUDE)$(INCLUDE)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME)
@@ -56,7 +56,7 @@ $(OBJS)	: $(PATH_OBJS)%.o: $(PATH_SRCS)%.c $(PATH_INCLUDE)$(INCLUDE) $(LIBFT_A)
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS) : $(PATH_OBJS) $(OBJS_BONUS) $(PATH_INCLUDE)$(INCLUDE_BONUS)
-	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_A) -o $(NAME_BONUS)
+	$(CC) $(CFLAGS) $(OBJS_BONUS) $(LIBFT_A) -o $(NAME)
 
 $(OBJS_BONUS)	: $(PATH_OBJS)%.o: $(PATH_SRCS_BONUS)%.c $(PATH_INCLUDE)$(INCLUDE_BONUS) $(LIBFT_A)
 				$(CC) $(CFLAG) -I$(PATH_INCLUDE) -I$(PATH_LIBFT) -c $< -o $@
