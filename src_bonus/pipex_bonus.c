@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/05/30 12:12:22 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:19:33 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	ft_loop(t_struct param, int i)
 
 int	main(int ac, char **av, char **env)
 {
-	t_struct	param;
+	// t_struct	param;
 	int			fd_in;
 	int			fd_out;
 	int			i;
 
-	param.ac = ac;
-	param.av = av;
-	param.env = env;
+	// param.ac = ac;
+	// param.av = av;
+	// param.env = env;
 	if (ac < 5)
 		return (ft_printf("Wrong number of parameters\n"), 1);
 	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) == 0)
@@ -69,7 +69,7 @@ int	main(int ac, char **av, char **env)
 		dup2(fd_in, STDIN_FILENO);
 		i = 2;
 	}
-	ft_loop(param, i);
+	ft_loop(ac, av, env, i);
 	dup2(fd_out, STDOUT_FILENO);
 	ft_apply_exec(av[ac - 2], env);
 	return (0);
