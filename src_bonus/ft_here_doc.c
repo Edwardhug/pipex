@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:42:42 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 11:13:41 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/02 11:24:39 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_child_here_doc(char **av, int *fd)
 		if (ft_strncmp(tmp, av[2], ft_strlen(av[2])) == 0)
 		{
 			free(tmp);
-			exit(EXIT_SUCCESS);
+			return ;
 		}
 		ft_putstr_fd(tmp, fd[1]);
 		free(tmp);
