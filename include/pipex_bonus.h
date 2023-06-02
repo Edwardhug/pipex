@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:46:55 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/01 16:59:15 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/02 11:13:55 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	ft_apply_exec(char *cmd, char **env);
 char	*ft_get_cmd(char **env, char **splited_cmd);
 char	*ft_get_path_cmd(char **all_path, char **splited_cmd);
 void	ft_here_doc(int ac, char **av);
+void	check_here_doc(int ac, char **av, int *fd_out, int *i);
 
 #endif

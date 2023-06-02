@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 10:52:09 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/02 11:14:37 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,16 @@ int	main(int ac, char **av, char **env)
 
 	if (ac < 5)
 		return (ft_printf("Wrong number of parameters\n"), 1);
-	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) == 0)
-	{
-		fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
-		ft_here_doc(ac, av);
-		i = 3;
-	}
-	else
+	check_here_doc(ac, av, &fd_out, &i);
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0)
 	{
 		fd_in = open(av[1], O_RDONLY);
 		fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (fd_in < 0)
+		{
+			close(fd_out);
 			return (ft_printf("no such file or directory: %s\n", av[1]), 1);
+		}
 		dup2(fd_in, STDIN_FILENO);
 		i = 2;
 	}
