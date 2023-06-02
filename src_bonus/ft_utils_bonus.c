@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/01 16:56:20 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/02 10:52:38 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,43 @@ void	ft_free_tab(char **str)
 	free(str);
 }
 
-void	print_error(char **splited_cmd, char **all_path)
+void	print_error(char **splited_cmd, char **all_path, int i)
 {
-	ft_putstr_fd("command not found: ", 2);
+	if (i == 1)
+		ft_putstr_fd("command not found: ", 2);
+	else
+		ft_putstr_fd("no such file or directory: ", 2);
 	ft_putstr_fd(splited_cmd[0], 2);
 	ft_putstr_fd("\n", 2);
 	ft_free_tab(splited_cmd);
 	ft_free_tab(all_path);
 }
 
-char	*ft_get_path_cmd(char **all_path, char **splited_cmd)
+char	*ft_get_path_cmd(char **all_path, char **splited)
 {
 	int		i;
 	char	*tmp;
 	char	*path_cmd;
 
 	i = 0;
-	if (splited_cmd[0][0] == '/')
+	if (splited[0][0] == '/')
 	{
-		path_cmd = ft_strdup(splited_cmd[0]);
+		path_cmd = ft_strdup(splited[0]);
 		if (access(path_cmd, F_OK | X_OK) == -1)
-			return (print_error(splited_cmd, all_path), free(path_cmd), NULL);
+			return (print_error(splited, all_path, 0), free(path_cmd), NULL);
 		return (path_cmd);
 	}
 	while (all_path[i])
 	{
 		tmp = ft_strjoin(all_path[i], "/");
-		path_cmd = ft_strjoin(tmp, splited_cmd[0]);
+		path_cmd = ft_strjoin(tmp, splited[0]);
 		if (access(path_cmd, F_OK | X_OK) != -1)
 			return (free(tmp), path_cmd);
 		free(path_cmd);
 		free(tmp);
 		i++;
 	}
-	print_error(splited_cmd, all_path);
+	print_error(splited, all_path, 1);
 	return (NULL);
 }
 
@@ -90,9 +93,9 @@ void	ft_apply_exec(char *cmd, char **env)
 
 	splited_cmd = ft_split(cmd, ' ');
 	if (!splited_cmd)
-		exit(ft_printf("malloc error splited_cmd\n", EXIT_FAILURE));
+		return ;
 	path_cmd = ft_get_cmd(env, splited_cmd);
 	if (!path_cmd)
-		exit(ft_printf("malloc error path_cmd\n", EXIT_FAILURE));
+		return ;
 	execve(path_cmd, splited_cmd, env);
 }

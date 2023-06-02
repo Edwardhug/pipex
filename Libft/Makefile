@@ -6,7 +6,7 @@
 #    By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/30 11:46:37 by lgabet            #+#    #+#              #
-#    Updated: 2023/05/03 16:04:31 by lgabet           ###   ########.fr        #
+#    Updated: 2023/06/02 10:21:27 by lgabet           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,9 +70,7 @@ printf/srcs/ft_itoa.c\
 printf/srcs/ft_unsigned_itoa.c\
 printf/srcs/ft_itoa_x.c
 
-HEADERS = libft/includes/libft.h\
-get_next_line/includes/get_next_line.h\
-printf/includes/ft_printf.h
+HEADERS = all_libft.h
 OBJS= ${SRCS:.c=.o}
 
 all: $(NAME)
