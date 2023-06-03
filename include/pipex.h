@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 15:40:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/01 16:59:43 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/03 10:46:59 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <stdio.h>
 
 void	ft_apply_exec(char *cmd, char **env);
 char	*ft_get_cmd(char **env, char **splited_cmd);

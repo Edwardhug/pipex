@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 11:14:37 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/03 10:44:53 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,23 @@ int	main(int ac, char **av, char **env)
 	check_here_doc(ac, av, &fd_out, &i);
 	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0)
 	{
+		i = 2;
 		fd_in = open(av[1], O_RDONLY);
-		fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 		if (fd_in < 0)
 		{
-			close(fd_out);
-			return (ft_printf("no such file or directory: %s\n", av[1]), 1);
+			i++;
+			perror(av[1]);
 		}
+		fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd_out < 0)
+			perror(av[ac - 1]);
 		dup2(fd_in, STDIN_FILENO);
-		i = 2;
 	}
 	ft_loop(ac, av, env, i);
-	dup2(fd_out, STDOUT_FILENO);
-	ft_apply_exec(av[ac - 2], env);
+	if (fd_out)
+	{
+		dup2(fd_out, STDOUT_FILENO);
+		ft_apply_exec(av[ac - 2], env);
+	}
 	close_fd(av, fd_in, fd_out);
 }
