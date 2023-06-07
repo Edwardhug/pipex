@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/03 10:44:53 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:16:51 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	ft_child_process(char **av, char **env, int i, int *fd)
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
 	ft_apply_exec(av[i], env);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_pipe_and_fork(char **av, char **env, int i)
@@ -35,11 +36,19 @@ void	ft_pipe_and_fork(char **av, char **env, int i)
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
+	{
+		if (i == -1)
+		{
+			close(fd[1]);
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+			exit(EXIT_FAILURE);
+		}
 		ft_child_process(av, env, i, fd);
+	}
 	else
 	{
 		close(fd[1]);
-		waitpid(pid, 0, 0);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 	}
@@ -47,6 +56,9 @@ void	ft_pipe_and_fork(char **av, char **env, int i)
 
 void	ft_loop(int ac, char **av, char **env, int i)
 {
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0 &&
+		i == 3)
+		ft_pipe_and_fork(av, env, -1);
 	while (i < ac - 2)
 	{
 		ft_pipe_and_fork(av, env, i);
@@ -72,10 +84,11 @@ int	main(int ac, char **av, char **env)
 			i++;
 			perror(av[1]);
 		}
+		else
+			dup2(fd_in, STDIN_FILENO);
 		fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (fd_out < 0)
 			perror(av[ac - 1]);
-		dup2(fd_in, STDIN_FILENO);
 	}
 	ft_loop(ac, av, env, i);
 	if (fd_out)

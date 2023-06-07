@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 10:52:38 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/07 11:25:51 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ char	*ft_get_cmd(char **env, char **splited_cmd)
 	all_path = ft_split(path, ':');
 	if (!all_path)
 		return (NULL);
+	
 	return (ft_get_path_cmd(all_path, splited_cmd));
 }
 
@@ -92,10 +93,11 @@ void	ft_apply_exec(char *cmd, char **env)
 	char	**splited_cmd;
 
 	splited_cmd = ft_split(cmd, ' ');
-	if (!splited_cmd)
-		return ;
+	if (!splited_cmd || !splited_cmd[0])
+		exit(EXIT_FAILURE);
 	path_cmd = ft_get_cmd(env, splited_cmd);
 	if (!path_cmd)
-		return ;
+		exit(EXIT_FAILURE);
 	execve(path_cmd, splited_cmd, env);
+	exit(EXIT_FAILURE);
 }
