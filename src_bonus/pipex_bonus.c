@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/07 11:16:51 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:04:23 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_pipe_and_fork(char **av, char **env, int i)
 
 void	ft_loop(int ac, char **av, char **env, int i)
 {
-	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0 &&
-		i == 3)
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0
+		&& i == 3)
 		ft_pipe_and_fork(av, env, -1);
 	while (i < ac - 2)
 	{
@@ -91,7 +91,7 @@ int	main(int ac, char **av, char **env)
 			perror(av[ac - 1]);
 	}
 	ft_loop(ac, av, env, i);
-	if (fd_out)
+	if (fd_out > 0)
 	{
 		dup2(fd_out, STDOUT_FILENO);
 		ft_apply_exec(av[ac - 2], env);

@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:42:42 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 11:24:39 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/08 12:03:07 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_here_doc(int ac, char **av, int *fd_out, int *i)
 {
 	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) == 0)
 	{
-		*fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0777);
+		*fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 		ft_here_doc(ac, av);
 		*i = 3;
 	}
