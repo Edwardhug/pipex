@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 16:58:24 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 10:50:54 by lgabet           ###   ########.fr       */
+/*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
+/*   Updated: 2023/06/09 15:30:55 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_get_path_cmd(char **all_path, char **splited)
 		free(tmp);
 		i++;
 	}
-	print_error(splited, all_path, 1);
+	print_error(splited, all_path, 0);
 	return (NULL);
 }
 
@@ -92,10 +92,14 @@ void	ft_apply_exec(char *cmd, char **env)
 	char	**splited_cmd;
 
 	splited_cmd = ft_split(cmd, ' ');
-	if (!splited_cmd)
-		return ;
+	if (!splited_cmd || !splited_cmd[0])
+	{
+		ft_putstr_fd("permission denied:\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	path_cmd = ft_get_cmd(env, splited_cmd);
 	if (!path_cmd)
-		return ;
+		exit(EXIT_FAILURE);
 	execve(path_cmd, splited_cmd, env);
+	exit(EXIT_FAILURE);
 }

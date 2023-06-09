@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   ft_utils_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 15:28:20 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 15:28:41 by lgabet           ###   ########.fr       */
+/*   Created: 2023/06/09 15:30:14 by lgabet            #+#    #+#             */
+/*   Updated: 2023/06/09 15:30:41 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#include "../include/pipex.h"
 
-# include "../Libft/all_libft.h"
-# include <fcntl.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/wait.h>
-# include <stdio.h>
+int	open_fd_in(int *i, char **av)
+{
+	int	fd;
 
-void	ft_apply_exec(char *cmd, char **env);
-char	*ft_get_cmd(char **env, char **splited_cmd);
-char	*ft_get_path_cmd(char **all_path, char **splited_cmd);
-int		open_fd_in(int *i, char **av);
-
-#endif
+	*i = 2;
+	fd_in = open(av[1], O_RDONLY);
+	if (fd_in < 0)
+	{
+		i = 3;
+		perror(av[1]);
+	}
+	else
+		dup2(fd_in, STDIN_FILENO);
+}

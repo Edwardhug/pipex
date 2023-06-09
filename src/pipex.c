@@ -5,12 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 16:58:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/02 10:51:14 by lgabet           ###   ########.fr       */
+/*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
+/*   Updated: 2023/06/09 15:31:12 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipex.h"
+
+void	close_fd(char **av, int fd_in, int fd_out)
+{
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0)
+		close(fd_in);
+	close(fd_out);
+}
 
 void	ft_child_process(char **av, char **env, int i, int *fd)
 {
@@ -18,6 +25,7 @@ void	ft_child_process(char **av, char **env, int i, int *fd)
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[1]);
 	ft_apply_exec(av[i], env);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_pipe_and_fork(char **av, char **env, int i)
@@ -28,11 +36,19 @@ void	ft_pipe_and_fork(char **av, char **env, int i)
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
+	{
+		if (i == -1)
+		{
+			close(fd[1]);
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);
+			exit(EXIT_FAILURE);
+		}
 		ft_child_process(av, env, i, fd);
+	}
 	else
 	{
 		close(fd[1]);
-		waitpid(pid, 0, 0);
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[0]);
 	}
@@ -40,6 +56,9 @@ void	ft_pipe_and_fork(char **av, char **env, int i)
 
 void	ft_loop(int ac, char **av, char **env, int i)
 {
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0
+		&& i == 3)
+		ft_pipe_and_fork(av, env, -1);
 	while (i < ac - 2)
 	{
 		ft_pipe_and_fork(av, env, i);
@@ -55,19 +74,18 @@ int	main(int ac, char **av, char **env)
 
 	if (ac != 5)
 		return (ft_printf("Wrong number of parameters\n"), 1);
-	fd_in = open(av[1], O_RDONLY);
-	fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fd_in < 0)
+	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0)
 	{
-		close(fd_out);
-		return (ft_printf("no such file or directory: %s\n", av[1]), 1);
+		fd_in = open_fd_in(&i, av);
+		fd_out = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd_out < 0)
+			perror(av[ac - 1]);
 	}
-	dup2(fd_in, STDIN_FILENO);
-	i = 2;
 	ft_loop(ac, av, env, i);
-	dup2(fd_out, STDOUT_FILENO);
-	ft_apply_exec(av[ac - 2], env);
-	close(fd_in);
-	close(fd_out);
-	return (0);
+	if (fd_out > 0)
+	{
+		dup2(fd_out, STDOUT_FILENO);
+		ft_apply_exec(av[ac - 2], env);
+	}
+	close_fd(av, fd_in, fd_out);
 }

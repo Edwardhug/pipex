@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/07 15:14:01 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/09 15:23:09 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ char	*ft_get_cmd(char **env, char **splited_cmd)
 	all_path = ft_split(path, ':');
 	if (!all_path)
 		return (NULL);
-	
 	return (ft_get_path_cmd(all_path, splited_cmd));
 }
 
