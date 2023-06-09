@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 11:42:42 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 15:26:52 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/09 15:36:35 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,16 @@ void	ft_here_doc(int ac, char **av)
 
 int	open_fd_in(int *i, char **av)
 {
-	int	fd;
+	int	fd_in;
 
 	*i = 2;
 	fd_in = open(av[1], O_RDONLY);
 	if (fd_in < 0)
 	{
-		i = 3;
+		*i = 3;
 		perror(av[1]);
 	}
 	else
 		dup2(fd_in, STDIN_FILENO);
+	return (fd_in);
 }
