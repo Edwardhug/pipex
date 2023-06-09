@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 15:23:09 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/09 17:46:20 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ void	ft_apply_exec(char *cmd, char **env)
 	splited_cmd = ft_split(cmd, ' ');
 	if (!splited_cmd || !splited_cmd[0])
 	{
+		if (!splited_cmd[0])
+			free(splited_cmd);
 		ft_putstr_fd("permission denied:\n", 2);
 		exit(EXIT_FAILURE);
 	}
