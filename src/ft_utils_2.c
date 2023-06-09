@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 15:30:14 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 15:36:26 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/09 16:56:15 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	open_fd_in(int *i, char **av)
 	}
 	else
 		dup2(fd_in, STDIN_FILENO);
+	close (fd_in);
 	return (fd_in);
 }

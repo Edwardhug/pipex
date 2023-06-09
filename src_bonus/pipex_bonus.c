@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 15:26:41 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/09 17:11:03 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	main(int ac, char **av, char **env)
 	ft_loop(ac, av, env, i);
 	if (fd_out > 0)
 	{
+		close(fd_out);
 		dup2(fd_out, STDOUT_FILENO);
 		ft_apply_exec(av[ac - 2], env);
 	}
