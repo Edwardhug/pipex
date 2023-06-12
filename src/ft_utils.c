@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 17:53:35 by lgabet           ###   ########.fr       */
+/*   Created: 2023/06/12 17:17:59 by lgabet            #+#    #+#             */
+/*   Updated: 2023/06/12 17:18:02 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_get_path_cmd(char **all_path, char **splited)
 		path_cmd = ft_strdup(splited[0]);
 		if (access(path_cmd, F_OK | X_OK) == -1)
 			return (print_error(splited, all_path, 0), free(path_cmd), NULL);
-		return (path_cmd);
+		return (ft_free_tab(all_path), path_cmd);
 	}
 	while (all_path[i])
 	{
@@ -80,6 +80,8 @@ char	*ft_get_cmd(char **env, char **splited_cmd)
 		i++;
 	}
 	path = path + 5;
+	if (ft_strncmp(splited_cmd[0], "./", 2) == 0)
+		path = "";
 	all_path = ft_split(path, ':');
 	if (!all_path)
 		return (NULL);
@@ -103,5 +105,10 @@ void	ft_apply_exec(char *cmd, char **env)
 	if (!path_cmd)
 		exit(EXIT_FAILURE);
 	execve(path_cmd, splited_cmd, env);
+	ft_putstr_fd("permission denied: ", 2);
+	ft_putstr_fd(path_cmd, 2);
+	ft_putstr_fd("\n", 2);
+	ft_free_tab(splited_cmd);
+	free(path_cmd);
 	exit(EXIT_FAILURE);
 }
