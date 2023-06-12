@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/12 16:50:20 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:09:46 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	*ft_get_path_cmd(char **all_path, char **splited)
 	{
 		tmp = ft_strjoin(all_path[i], "/");
 		path_cmd = ft_strjoin(tmp, splited[0]);
+		dprintf(2, "%s %d\n", path_cmd, access(path_cmd, F_OK | X_OK));
 		if (access(path_cmd, F_OK | X_OK) != -1)
 			return (free(tmp), path_cmd);
 		free(path_cmd);
@@ -80,6 +81,8 @@ char	*ft_get_cmd(char **env, char **splited_cmd)
 		i++;
 	}
 	path = path + 5;
+	if (ft_strncmp(splited_cmd[0], "./", 2) == 0)
+		path = "";
 	all_path = ft_split(path, ':');
 	if (!all_path)
 		return (NULL);
