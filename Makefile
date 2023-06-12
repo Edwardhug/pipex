@@ -1,7 +1,7 @@
 NAME = pipex
 
 
-CC = gcc
+CC = cc
 
 CFLAG = -Wall -Wextra -Werror -g3
 
