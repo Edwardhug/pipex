@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:56:17 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/12 17:11:36 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/06/29 16:09:31 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,14 @@ char	*ft_get_cmd(char **env, char **splited_cmd)
 
 	i = 0;
 	path = NULL;
-	while (!path)
+	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 			path = env[i];
 		i++;
 	}
+	if (!env[i])
+		return (ft_free_tab(splited_cmd), NULL);
 	path = path + 5;
 	if (ft_strncmp(splited_cmd[0], "./", 2) == 0)
 		path = "";
