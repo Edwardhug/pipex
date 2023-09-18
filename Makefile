@@ -7,7 +7,7 @@ CFLAG = -Wall -Wextra -Werror -g3
 
 SRCS =	pipex.c\
 		ft_utils.c\
-		ft_utils_2.c
+		ft_set_fd.c
 
 INCLUDE = pipex.h
 
