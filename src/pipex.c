@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:18:11 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/12 17:18:41 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/09/18 12:49:51 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ft_pipe_and_fork(char **av, char **env, int i)
 	int	fd[2];
 	int	pid;
 
-	pipe(fd);
+	if (pipe(fd) == -1)
+		exit(EXIT_FAILURE);
 	pid = fork();
 	if (pid == 0)
 	{
