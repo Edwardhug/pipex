@@ -6,7 +6,7 @@
 /*   By: lgabet <lgabet@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:45:39 by lgabet            #+#    #+#             */
-/*   Updated: 2023/06/09 17:30:34 by lgabet           ###   ########.fr       */
+/*   Updated: 2023/09/18 11:55:49 by lgabet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	main(int ac, char **av, char **env)
 	check_here_doc(ac, av, &i);
 	if (ft_strncmp(av[1], "here_doc", ft_strlen("here_doc")) != 0)
 		fd_in = open_fd_in(&i, av);
+	else
+		fd_in = -1;
 	ft_loop(ac, av, env, i);
 	fd_out = open_fd_out(ac, av);
 	if (fd_out > 0)
